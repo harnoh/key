@@ -100,7 +100,7 @@ export class Renderer {
         const x = 20;
         // In many standard fonts, the baseline of the G-clef character places the spiral roughly 
         // 1/3 to 1/4 of the way up from the baseline. We offset it so the spiral hits G4.
-        const yOffset = this.lineSpacing * 2.2;
+        const yOffset = this.lineSpacing * 1.2;
         ctx.fillText('𝄞', x, g4_y + yOffset);
     }
 
