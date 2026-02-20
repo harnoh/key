@@ -88,20 +88,20 @@ export class Renderer {
         ctx.font = `${this.lineSpacing * 4}px serif`;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'alphabetic'; // Base line of text
-        // 𝄞 G-Clef unicode is U+1D11E, but support might vary.
-        // Let's try 𝄞 first, fallback to 'G'.
-        // G clef spirals around G line (2nd line from bottom).
-        // B4 is center (3rd line). G4 is 2nd line (-1 spacing from center).
+        // 𝄞 G-Clef unicode is U+1D11E
+        // We want the spiral (usually the lower-middle part of the character) to align with G4.
+        // G4 is the 2nd line from the bottom.
+        // Center B4 is at `this.staffY`. G4 is one line-space below it.
+        const g4_y = this.staffY + this.lineSpacing;
 
-        // Position G clef.
-        // It's quite tall. 
-        const x = 30;
-        const y = this.staffY + this.lineSpacing; // Roughly G4 line level for baseline?
-        // G clef usually sits where the spiral center is on G4 line.
+        // Font size needs to scale with staff height (4 spaces).
+        ctx.font = `${this.lineSpacing * 6.5}px serif`;
 
-        // Fine-tuning unicode rendering is hard. SVG path is better but complex code.
-        // Let's use simple text for now.
-        ctx.fillText('𝄞', x, this.staffY + this.lineSpacing);
+        const x = 20;
+        // In many standard fonts, the baseline of the G-clef character places the spiral roughly 
+        // 1/3 to 1/4 of the way up from the baseline. We offset it so the spiral hits G4.
+        const yOffset = this.lineSpacing * 2.2;
+        ctx.fillText('𝄞', x, g4_y + yOffset);
     }
 
     getNoteY(noteData) {
