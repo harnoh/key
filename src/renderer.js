@@ -27,7 +27,7 @@ export class Renderer {
 
         // Center staff vertically
         this.staffY = this.height / 2;
-        this.lineSpacing = Math.max(14, this.height / 15); // Dynamic spacing
+        this.lineSpacing = Math.max(20, this.height / 10); // Dynamic spacing
         this.noteRadius = this.lineSpacing * 0.45;
 
         this.render(); // Re-render on resize
