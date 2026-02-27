@@ -33,6 +33,8 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  /* Fallback for older browsers */
+  height: 100dvh;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -223,5 +225,39 @@ main {
   .controls {
     gap: 0.5rem;
     font-size: 0.8rem;
+  }
+}
+
+/* Landscape adjustments for small height screens */
+@media (max-height: 500px) {
+  header {
+    padding: 0.25rem 0.5rem;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  .controls {
+    gap: 0.25rem;
+  }
+
+  button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  #notation-container {
+    margin: 0.25rem 0.5rem;
+    min-height: 0;
+  }
+
+  #keyboard-container {
+    min-height: 80px;
+    padding-bottom: 2px;
+  }
+
+  #settings-panel {
+    padding: 0.25rem;
   }
 }
