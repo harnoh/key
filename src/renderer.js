@@ -198,29 +198,23 @@ export class Renderer {
         }
 
         // Draw Ledger Lines
-        // C4 (index 0). Line 1 is E4 (index 2).
-        // Ledger needed for C4, A5, B5(no), C6.
         // Staff lines are indexes 2, 4, 6, 8, 10. (E4, G4, B4, D5, F5)
         // Center B4 is 6.
 
-        // If index <= 0 (C4 below), we need line at 0 (C4).
-        // If index >= 12 (C6 above), need line at 12 (A5 is 11, line at 12).
-
-        // C4: index 0. Lower than E4 (2). Need line at 0.
+        // Multiple ledger lines below staff
         if (diatonicIndex <= 0) {
-            // Draw line at index 0
-            this.drawLedgerLine(x, this.staffY - (0 - 6) * (this.lineSpacing / 2));
+            // Draw all even ledger lines from 0 down to the note's index
+            for (let i = 0; i >= diatonicIndex; i -= 2) {
+                this.drawLedgerLine(x, this.staffY - (i - 6) * (this.lineSpacing / 2));
+            }
         }
 
-        // A5: index 12. Staff top is F5 (10). Next space G5 (11). Line A5 needs ledger? 
-        // Upper lines: A5 (12) -> Line. C6 (14) -> Line.
+        // Multiple ledger lines above staff
         if (diatonicIndex >= 12) {
-            // A5
-            this.drawLedgerLine(x, this.staffY - (12 - 6) * (this.lineSpacing / 2));
-        }
-        if (diatonicIndex >= 14) {
-            // C6
-            this.drawLedgerLine(x, this.staffY - (14 - 6) * (this.lineSpacing / 2));
+            // Draw all even ledger lines from 12 up to the note's index
+            for (let i = 12; i <= diatonicIndex; i += 2) {
+                this.drawLedgerLine(x, this.staffY - (i - 6) * (this.lineSpacing / 2));
+            }
         }
     }
 
